@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(lex)
-SET(CMAKE_CXX_COMPILER_ENV_VAR "CXX")
+SET(CMAKE_CXX_COMPILER_ENV_VAR "clang++")
 SET(CMAKE_CXX_FLAGS "-std=c++11")
 include_directories(include)
 file(GLOB_RECURSE lex_source_files "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
