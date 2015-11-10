@@ -6,7 +6,12 @@ include_directories(include)
 file(GLOB_RECURSE lex_source_files "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 add_library(lex STATIC ${lex_source_files}) 
 add_executable(lextest ${lex_source_files})
-install(TARGETS lextest RUNTIME DESTINATION bin)
+
+find_package(PkgConfig)
+pkg_check_modules(GLIBMM glibmm-2.4)
+link_directories(${GLIBMM_LIBRARY_DIRS})
+include_directories(${GLIBMM_INCLUDE_DIRS})
+target_link_libraries(lextest ${GLIBMM_LIBRARIES})
 
 
 FIND_PACKAGE(Doxygen)  
