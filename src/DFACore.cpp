@@ -30,6 +30,7 @@ Token* DFACore::Read() {
                     return t;
                 }
             } else {
+                printf("Token: %s\n", tokendata.c_str());
                 printf("ERROR STATE %d row: %d line: %d \n",state, row_point,line_point);
                 return t;
             }
