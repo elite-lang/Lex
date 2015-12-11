@@ -153,9 +153,9 @@ bool RuleManager::testequal(vector< int > a, vector< int > b) {
 	return true;
 }
 
-void RuleManager::InitCore(const char* pData) {
+void RuleManager::InitCore() {
 	core = new DFACore();
-	core->Init(mainDFA,pData,pEClass);
+	core->Init(mainDFA,pEClass);
 }
 
 Token* RuleManager::Read() {

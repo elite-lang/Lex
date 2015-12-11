@@ -2,7 +2,7 @@
 * @Author: sxf
 * @Date:   2015-01-01 23:48:42
 * @Last Modified by:   sxf
-* @Last Modified time: 2015-11-08 20:12:20
+* @Last Modified time: 2015-12-07 08:54:24
 */
 
 #ifndef LEX_INTERFACE_H
@@ -26,6 +26,12 @@ public:
     // 对应每个规则，询问其名称是什么，为了在语法定义中和对应的id关联
     virtual const char* getRule(int id) = 0;
     
+    // 初始化整个词法系统，并设置当前输入字符流，可以设置为NULL
+    virtual void Init(const char* pData) = 0;
+
+    // 不再初始化系统，只是简单的重设置输入字符流
+    virtual void setData(const char* pData) = 0;
+
     // 获取总共有多少个词法规则
     virtual int getRuleSize() = 0;
 };

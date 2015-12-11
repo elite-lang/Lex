@@ -523,9 +523,13 @@
 	"build_system": "Packages/User/cmake.sublime-build",
 	"command_palette":
 	{
-		"height": 435.0,
+		"height": 287.0,
 		"selected_items":
 		[
+			[
+				"gitgui",
+				"Git: Gui"
+			],
 			[
 				"set mark",
 				"Set Syntax: Markdown"
@@ -855,10 +859,6 @@
 				"Set Syntax: C++"
 			],
 			[
-				"gitgui",
-				"Git: Gui"
-			],
-			[
 				"gitgu",
 				"Git: Gui"
 			],
@@ -1096,18 +1096,19 @@
 	],
 	"file_history":
 	[
+		"/home/sxf/data/workspace/Complier/Lex/src/DFACore.cpp",
+		"/home/sxf/data/workspace/Complier/Lex/src/RuleManager.cpp",
+		"/home/sxf/data/workspace/Complier/Lex/include/DFA.h",
+		"/home/sxf/data/workspace/Complier/Lex/src/DFA.cpp",
+		"/home/sxf/data/workspace/Complier/Lex/build/Makefile",
 		"/home/sxf/data/workspace/Blog/编译器架构的王者——LLVM/编译器架构的王者LLVM——（4）简单的词法和语法分析",
 		"/home/sxf/data/workspace/Blog/编译器架构的王者——LLVM/编译器架构的王者LLVM——（5）宏翻译系统的基本架构",
 		"/home/sxf/data/workspace/Complier/Lex/include/DFACore.h",
 		"/home/sxf/data/workspace/Complier/Lex/src/EquivalenceClass.cpp",
-		"/home/sxf/data/workspace/Complier/Lex/src/DFACore.cpp",
-		"/home/sxf/data/workspace/Complier/Lex/src/DFA.cpp",
 		"/home/sxf/data/workspace/Complier/Lex/src/Regex.cpp",
 		"/home/sxf/data/workspace/Complier/Lex/src/Lex.cpp",
-		"/home/sxf/data/workspace/Complier/Lex/src/RuleManager.cpp",
 		"/home/sxf/data/workspace/Complier/Lex/include/CharSet.h",
 		"/home/sxf/data/workspace/Complier/Lex/src/CharSet.cpp",
-		"/home/sxf/data/workspace/Complier/Lex/include/DFA.h",
 		"/home/sxf/data/workspace/Complier/Lex/include/EquivalenceClass.h",
 		"/home/sxf/data/workspace/Complier/Lex/include/LexInterface.h",
 		"/home/sxf/data/workspace/Complier/Lex/CMakeLists.txt",
@@ -1222,8 +1223,7 @@
 		"/home/sxf/data/workspace/Complier/RedApple/src/Model/nodes.h",
 		"/home/sxf/data/workspace/Complier/RedApple/src/Model/FloatNode.cpp",
 		"/home/sxf/data/workspace/Complier/RedApple/src/Model/CharNode.h",
-		"/home/sxf/data/workspace/Complier/RedApple/src/Model/FloatNode.h",
-		"/home/sxf/data/workspace/Complier/RedApple/src/Model/StringNode.cpp"
+		"/home/sxf/data/workspace/Complier/RedApple/src/Model/FloatNode.h"
 	],
 	"find":
 	{

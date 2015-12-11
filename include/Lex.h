@@ -2,7 +2,7 @@
 * @Author: sxf
 * @Date:   2014-10-02 20:30:46
 * @Last Modified by:   sxf
-* @Last Modified time: 2015-11-08 20:14:21
+* @Last Modified time: 2015-12-07 11:49:03
 */
 #include "LexInterface.h"
 #include <stdio.h>
@@ -21,15 +21,12 @@ public:
 	Lex();
 	~Lex();
 
-	// data is the buffer pointer, isCopy means to copy the buffer for a new one
-	Lex(const char* pData);
-
 	// get the next token ,if it is done ,will return NULL
 	// it may throw exception, please try and catch it 
     virtual Token* Read();
 
 	// initialize the Lex system, must be called before Read Token, it can also set the pData
-	void Init(const char* pData = NULL);
+	virtual void Init(const char* pData = NULL);
 
 	// read the config, you need to call it manually before init system, it will find the lex.cfg at the ./ path
 	bool ReadConfig(const char* path = NULL);
@@ -50,7 +47,7 @@ public:
 	// getter and setter 
 	// ============================================
 	const char* getData();
-	void setData(const char* pData);
+	virtual void setData(const char* pData);
 
 private:
 
