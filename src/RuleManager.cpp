@@ -13,10 +13,10 @@ RuleManager::~RuleManager() {
 
 }
 
-int RuleManager::AddRule(const char* pName,const char* pPattern)
+int RuleManager::AddRule(const char* pName, const char* pPattern)
 {
-	Glib::ustring name(pName);
-	Glib::ustring pattern(pPattern);
+	string name(pName);
+	estring pattern(pPattern);
 
 	int id = FindRule(pName);
 	if (id != -1) { // 已经找到了已有的Rule，更新其
@@ -26,7 +26,7 @@ int RuleManager::AddRule(const char* pName,const char* pPattern)
 		r.name = name;
 		r.pattern = pattern;
 		r.dfa->setEClass(pEClass);
-		Regex* re = new Regex(r.pattern.c_str(), pEClass);
+		Regex* re = new Regex(r.pattern, pEClass);
 		r.dfa->Init(re);
 		return id;
 	} 
@@ -36,10 +36,10 @@ int RuleManager::AddRule(const char* pName,const char* pPattern)
 	r.name = name;
 	r.pattern = pattern;
 	r.dfa->setEClass(pEClass);
-	Regex* re = new Regex(r.pattern.c_str(), pEClass);
+	Regex* re = new Regex(r.pattern, pEClass);
 	r.dfa->Init(re);
 
-	if (name == Glib::ustring("ignore"))
+	if (name == string("ignore"))
 		ruleList.insert(ruleList.begin(),r);
 	else
 		ruleList.push_back(r);

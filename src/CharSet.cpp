@@ -3,6 +3,7 @@
 using namespace std;
 
 
+
 CharSet::CharSet()
 {
 }
@@ -18,9 +19,9 @@ CharSet::CharSet(const CharSet& copy) {
 	charset.insert(copy.charset.begin(),copy.charset.end());
 }
 
-CharSet::CharSet(const Glib::ustring _str) {
+CharSet::CharSet(const estring& _str) {
     this->str = _str;
-	gunichar last = 0;
+	echar_t last = 0;
 	this->eclass_sum = 1;
 	bool isConnector = false;
 	for (auto i = str.begin(); i != str.end(); ++i)
@@ -37,7 +38,7 @@ CharSet::CharSet(const Glib::ustring _str) {
 				isConnector = true;
 			}
 			else {
-				gunichar c = *i;
+				echar_t c = *i;
 				if (c == '\\') {
 					c = CharEscape(i);
 				}
@@ -64,7 +65,7 @@ CharSet::CharSet(const Glib::ustring _str) {
 
 // void CharSet::Combine(const CharSet& obj) {
 // 	eclass_sum++;
-// 	gunichar t;
+// 	echar_t t;
 // 	for (auto i = obj.charset.begin(); i != obj.charset.end(); ++i)
 // 	{
 // 		if (i->second.type == 0)
@@ -97,7 +98,7 @@ CharSet::CharSet(const Glib::ustring _str) {
 // 	}
 // }
 
-// void CharSet::insert(gunichar p, gunichar q, unsigned short eclass) {
+// void CharSet::insert(echar_t p, echar_t q, unsigned short eclass) {
 // 	if (p != q) {
 		
 
@@ -109,7 +110,7 @@ CharSet::CharSet(const Glib::ustring _str) {
 // }
 
 
-void CharSet::insert(gunichar p, gunichar q) {
+void CharSet::insert(echar_t p, echar_t q) {
 	if (p == q) {
 		insert(p);
 		return;
@@ -118,7 +119,7 @@ void CharSet::insert(gunichar p, gunichar q) {
 	//charset.insert(make_pair(q, cv(-1, 1)));
 	charset[p].type = 1;
 	charset[q].type = -1;
-	map<gunichar, cv>::iterator f, l;
+	map<echar_t, cv>::iterator f, l;
 	auto i = charset.find(p);
 	if (i == charset.begin() || ( (i->first - (--i)->first > 1) && (i->second.type != 1)))
 	{
@@ -159,7 +160,7 @@ void CharSet::insert(gunichar p, gunichar q) {
 		charset.erase(l, f);
 }
 
-void CharSet::insert(gunichar c) {
+void CharSet::insert(echar_t c) {
 	auto i = charset.find(c);
 	if (i == charset.end()) {
 		charset[c].type = 0;
@@ -200,7 +201,7 @@ bool CharSet::operator==(const CharSet& p)
 }
 
 // 转义函数，注意将指针指到转义的结尾就行，不用加1
-gunichar CharSet::CharEscape(Glib::ustring::iterator& i) {
+echar_t CharSet::CharEscape(estring::iterator& i) {
 	++i; int ws;
 	switch (*i)
 	{
@@ -220,11 +221,11 @@ gunichar CharSet::CharEscape(Glib::ustring::iterator& i) {
 		default: return *i;
 	}
 EscapeChange:
-	Glib::ustring num;
+	string num;
 	for (int j = 0; j< ws; ++j) {
-		++i; num += *i;
+		++i; num += (char)(*i);
 	}
-	gunichar c = (gunichar) HexToDec(num.c_str());
+	echar_t c = (echar_t) HexToDec(num.c_str());
 	return c;
 }
 
@@ -282,7 +283,7 @@ int CharSet::HexToDec(const char *s)
 
 //CharSet::CharSet(std::wstring str) {
 //	this->str = std::wstring(str);
-//	gunichar last = 0;
+//	echar_t last = 0;
 //	this->eclass_sum = 1;
 //	bool isConnector = false;
 //	for (auto i = str.begin(); i != str.end(); ++i)
@@ -300,7 +301,7 @@ int CharSet::HexToDec(const char *s)
 //				isConnector = true;
 //			}
 //			else {
-//				gunichar c = *i;
+//				echar_t c = *i;
 //				if (*i == '\\') {
 //
 //				}
@@ -353,7 +354,7 @@ int CharSet::HexToDec(const char *s)
 //}
 //
 //// 抽象出来，将任意一个符号插入时的分割操作
-//void CharSet::insert(gunichar c, char type, unsigned short eclass) {
+//void CharSet::insert(echar_t c, char type, unsigned short eclass) {
 //	//charset[c] = type;
 //	auto p = charset.find(c);
 //	if (p != charset.end()) {
@@ -399,7 +400,7 @@ int CharSet::HexToDec(const char *s)
 //}
 
 
-//void CharSet::insert(gunichar c, char type) {
+//void CharSet::insert(echar_t c, char type) {
 //	//charset[c] = type;
 //	auto p = charset.find(c);
 //	if (p != charset.end()) {

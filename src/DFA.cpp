@@ -19,7 +19,8 @@ void DFA::Init(Regex* _re)
 
 }
 
-bool DFA::Check(const wchar_t* data)
+/*
+bool DFA::Check(const echar_t* data)
 {
 	int statue = 0;
 	for (int p = 0; data[p] != 0; ++p) {
@@ -35,7 +36,7 @@ bool DFA::Check(const wchar_t* data)
 
 	}
 }
-
+*/
 
 void DFA::dfs(node* p)
 {
@@ -257,14 +258,14 @@ void DFA::print_func(){
 	for (auto i = node_vec.begin(); i != node_vec.end(); ++i){
 		auto p = *i;
 		if (p->type == 1)
-			wcout << '+' << i - node_vec.begin() << '\t';
+			cout << '+' << i - node_vec.begin() << '\t';
 		else if (p->type == 2)
-			wcout << L"END" << i - node_vec.begin() << '\t';
+			cout << "END" << i - node_vec.begin() << '\t';
 		else if (p->type != 0)
-			wcout << (wchar_t)p->type << i - node_vec.begin() << '\t';
+			cout << (char)p->type << i - node_vec.begin() << '\t';
 		else {
-			wcout << p->data->str;
-			wcout << i - node_vec.begin() << '\t';
+			cout << p->data->str.to_utf8();
+			cout << i - node_vec.begin() << '\t';
 		}
 
 		if (p->func->nullable) printf("true\t\t"); 
@@ -342,7 +343,7 @@ void DFA::print_func(){
 	}
 }
 
-int DFA::nextState(int s, wchar_t a)
+int DFA::nextState(int s, echar_t a)
 {
 	if (s == -1) return -1;
     if ((m_base[s] + a >= 0) && (m_base[s] + a < Top) && (m_check[m_base[s] + a] == s))
@@ -353,7 +354,7 @@ int DFA::nextState(int s, wchar_t a)
 	}
 }
 
-void DFA::addEdge(int s, int obj, wchar_t a)
+void DFA::addEdge(int s, int obj, echar_t a)
 {
 	int t = m_base[s] + a;
 	Top = t + 1;
@@ -375,7 +376,7 @@ int DFA::getStateSum(){
 void DFA::print_StateMap(){
 
     if (re != NULL)
-        printf("=== %s ===\n",re->getPattern());
+        printf("=== %s ===\n",re->getPattern().c_str());
     else
         printf("==== Main DFA ====\n");
     for (int i = 1; i<= pEClass->getSum(); ++i) {

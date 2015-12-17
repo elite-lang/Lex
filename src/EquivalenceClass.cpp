@@ -25,7 +25,7 @@ void EquivalenceClass::Add(CharSet &cset)
 		}
 	}
 
-	gunichar t;
+	echar_t t;
 	for (auto i = charset.begin(); i != charset.end(); ++i)
 	{
 		if (i->second.type == 0) {
@@ -66,9 +66,9 @@ void EquivalenceClass::Add(CharSet &cset)
 	}
 }
 
-void EquivalenceClass::insert(gunichar p, gunichar q, int xs)
+void EquivalenceClass::insert(echar_t p, echar_t q, int xs)
 {
-	for (gunichar k = p; k <= q; ++k)
+	for (echar_t k = p; k <= q; ++k)
 	{
 		if (xs == 1)
 			equivalence_class[k] += eclass_sum;
@@ -89,7 +89,7 @@ int EquivalenceClass::getSum(){
 // 这里可以将原来的字符集转换为等价类的表示法，变为等价类集合
 set<unsigned short> EquivalenceClass::makeSet(CharSet &charset)
 {
-	set<unsigned short> class_set; gunichar t,last;
+	set<unsigned short> class_set; echar_t t,last;
 	if (charset.negate) {
 		for (unsigned short i = 1; i <= eclass_sum; ++i) {
 			class_set.insert(i);
@@ -109,7 +109,7 @@ set<unsigned short> EquivalenceClass::makeSet(CharSet &charset)
 			t = i->first;
 			++i;
 			last = 0;
-			for (gunichar k = t; k <= i->first;++k)
+			for (echar_t k = t; k <= i->first;++k)
 			{
 				if (last != equivalence_class[k]) {
 					last = equivalence_class[k];
@@ -122,7 +122,7 @@ set<unsigned short> EquivalenceClass::makeSet(CharSet &charset)
 			}
 		}
 	}
-	printf("ClassSet %s: ", charset.str.c_str());
+	printf("ClassSet %s: ", charset.str.to_utf8().c_str());
 
 	for (auto& p : class_set) {
 		printf("%d ", p);
@@ -131,7 +131,7 @@ set<unsigned short> EquivalenceClass::makeSet(CharSet &charset)
 	return class_set;
 }
 
-unsigned short EquivalenceClass::getClass(gunichar c)
+unsigned short EquivalenceClass::getClass(echar_t c)
 {
 	if (c > 65535) return 0;
 	return equivalence_class[c];

@@ -12,19 +12,17 @@ Regex::~Regex()
 	delete root;
 }
 
-Regex::Regex(const char* pattern, EquivalenceClass* pEClass) {
+Regex::Regex(const estring& pattern, EquivalenceClass* pEClass) {
 	init(pattern, pEClass);
 }
 
-bool Regex::init(const char* pattern, EquivalenceClass* pEClass) {
+bool Regex::init(const estring& pattern, EquivalenceClass* pEClass) {
 	this->pattern = pattern;
 	this->setEClass(pEClass);
 	pointer = 0;
 	try {
-		gunichar c;
-		while ((c = pattern[pointer]) != 0) {
-			++pointer;
-			run(c);
+		for (; pointer < pattern.length(); ++pointer) {
+			run(pattern[pointer]);
 		}
 	} catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -42,7 +40,7 @@ bool Regex::init(const char* pattern, EquivalenceClass* pEClass) {
 }
 
 // 此处使用内联函数避免函数反复调用的开销 - - I don't know what I think...
-inline void Regex::run(gunichar c) {
+inline void Regex::run(echar_t c) {
 	if (c == ' ' || c == '\t') return; // jump all space and \t
 	if ((!operater_stack.empty()) && (operater_stack.top() == '[') && (c !=']')) {
 		tempSet.push_back(c);
@@ -178,10 +176,10 @@ void Regex::doCharSet(CharSet* pSet){
 }
 
 
-void Regex::push(gunichar c){
+void Regex::push(echar_t c){
 	switch (c){
 	case 1:{
-		gunichar ope;
+		echar_t ope;
 		while (!operater_stack.empty() && ((ope = operater_stack.top()) == 1)) {
 			pop();
 		}
@@ -189,7 +187,7 @@ void Regex::push(gunichar c){
 		break; 
 	}
 	case '|':{
-		gunichar ope;
+		echar_t ope;
 		while (!operater_stack.empty() && ((ope = operater_stack.top()) == 1 || ope == '|')) {
 			pop();
 		}
@@ -201,7 +199,7 @@ void Regex::push(gunichar c){
 		break;
 	case ')':{
 // 		if (operater_stack.empty()) throw new std::exception("the ) didn't matching", 1003);
-		gunichar top;
+		echar_t top;
 		while (!operater_stack.empty() && (top = operater_stack.top()) != '('){
 			pop();
 		}
@@ -215,7 +213,7 @@ void Regex::push(gunichar c){
 }
 
 void Regex::pop(){
-	gunichar top = operater_stack.top();
+	echar_t top = operater_stack.top();
 	if (top == '|' || top == 1) {
 		node* obj = obj_stack.top();
 		obj_stack.pop();
@@ -225,12 +223,12 @@ void Regex::pop(){
 	operater_stack.pop();
 }
 
-void Regex::doOperater(gunichar c){
+void Regex::doOperater(echar_t c){
 
 }
 
 void Regex::operate(){
-	gunichar top = operater_stack.top();
+	echar_t top = operater_stack.top();
 	operater_stack.pop();
 	switch (top) 
 	{
@@ -249,7 +247,7 @@ void Regex::operate(){
 	
 }
 
-void Regex::putOperater(gunichar c){
+void Regex::putOperater(echar_t c){
 // 	if (obj_stack.empty())
 // 	    throw new std::exception("empty obj_stack");
 	node* obj = obj_stack.top();
@@ -258,9 +256,9 @@ void Regex::putOperater(gunichar c){
 }
 
 CharSet* Regex::makeEscape() {
-	gunichar c = this->pattern[pointer];
-    ++pointer;
-    printf("%C",c);
+    ++pointer; // 额额, 这里居然顺序搞反了
+	echar_t c = this->pattern[pointer];
+    printf("%C", c); // 好在有这个提示, 本来都想把它删了 - -!
 	CharSet* pSet;
 	if (c != 0) {
 		switch (c)
@@ -319,7 +317,7 @@ CharSet* Regex::makeEscape() {
 			case 'x': // 后接2位16进制数
 				break;
 			default:{
-//				gunichar str[2];
+//				echar_t str[2];
 //				str[0] = c; str[1] = 0;
 //				pSet = new CharSet(str);
                 pSet = new CharSet();

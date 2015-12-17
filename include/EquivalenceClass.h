@@ -25,13 +25,13 @@ public:
 
 	set<unsigned short> makeSet(CharSet &charset);
 
-	unsigned short getClass(gunichar);
+	unsigned short getClass(echar_t);
 
 	int getSum();
 
 	void print();
 private:
-	void insert(gunichar p, gunichar q, int xs);
+	void insert(echar_t p, echar_t q, int xs);
 
 	int eclass_sum = 0;
 	vector<unsigned short> equivalence_class;

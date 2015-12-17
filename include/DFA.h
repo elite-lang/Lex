@@ -29,10 +29,10 @@ public:
 	// ========== State Map =========
 	
 	// used to get the next state
-	int nextState(int s,wchar_t a);
+	int nextState(int s, echar_t a);
 	
 	// add a new edge
-	void addEdge(int s, int obj, wchar_t a);
+	void addEdge(int s, int obj, echar_t a);
 
     // is the stop state, 返回对应的token id
     int isStopState(int s);
@@ -63,7 +63,7 @@ private:
 	set<node*> GetNextSet(set<node*> &setNode, CharSet p);
 	bool IsNodeSetInList(set<node*> &setNodeNext, int &nIdx);
 	bool IsContainAcceptingState(set<node*> &setNode);
-	bool Check(const wchar_t* data);
+	// bool Check(const echar_t* data);
 	vector<set<node*>> listSet;
 	
 	EquivalenceClass* pEClass;
@@ -74,9 +74,9 @@ private:
 public:
 	int Top;
 	
-	vector<wchar_t>	m_default;
+	vector<echar_t>	m_default;
 	vector<int>	m_base;
-	vector<wchar_t>	m_next;
+	vector<int>	m_next;
 	vector<int>	m_check;
 
 // 	int state_base; // 表示状态初始状态的开始标号 已弃用

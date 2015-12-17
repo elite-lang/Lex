@@ -2,7 +2,7 @@
 * @Author: sxf
 * @Date:   2014-10-02 23:31:33
 * @Last Modified by:   sxf
-* @Last Modified time: 2015-12-07 11:52:15
+* @Last Modified time: 2015-12-17 10:28:15
 */
 
 #include <string>
@@ -11,15 +11,16 @@
 #include "EquivalenceClass.h"
 #include "DFA.h"
 #include "DFACore.h"
+#include "estring.h"
 
 #ifndef RULEMANAGER_H
 #define RULEMANAGER_H
 
 struct Rule{
-	Glib::ustring name;
-	Glib::ustring pattern;
+	std::string name;
+	estring pattern;
 	DFA* dfa;
-	bool operator==(Glib::ustring obj){
+	bool operator== (const std::string& obj){
 		return name==obj;
 	}
 };
@@ -35,10 +36,10 @@ public:
 	~RuleManager();
 	
 	// add a new Lex rule
-    int AddRule(const char*,const char*); // return the rule's id
+	int AddRule(const char*, const char*); // return the rule's id
 
 	// find the rule, will return the id of it.
-    int FindRule(const char*);
+	int FindRule(const char*);
 	
     Token* Read();
 

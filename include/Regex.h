@@ -8,7 +8,7 @@
 #include <set>
 #include "CharSet.h"
 #include "EquivalenceClass.h"
-#include "glibmm.h"
+
 
 struct _node;
 typedef struct _node_func
@@ -64,9 +64,9 @@ public:
 	~Regex();
 
 	// it's same as init method
-	Regex(const char* pattern, EquivalenceClass* pEClass);
+	Regex(const estring& pattern, EquivalenceClass* pEClass);
 
-	bool init(const char* pattern, EquivalenceClass* pEClass = NULL);
+	bool init(const estring& pattern, EquivalenceClass* pEClass = NULL);
 
     node* getRoot() { return root; }
 
@@ -74,38 +74,38 @@ public:
 
 	void setEClass(EquivalenceClass* pEClass);
 	EquivalenceClass* getEClass();
-    const char* getPattern() { return pattern; }
+    std::string getPattern() { return pattern.to_utf8(); }
 
 private:
 
-	void run(gunichar c);
+	void run(echar_t c);
 	CharSet* makeEscape();
 	void doCharSet(CharSet*);
-	void doOperater(gunichar);
+	void doOperater(echar_t);
 	void operate();
-	void putOperater(gunichar c);
+	void putOperater(echar_t c);
 
-	void push(gunichar c);
+	void push(echar_t c);
 	void pop();
 	// ===================
 	// member variable
 	// ===================
 
-	const char* pattern;
+	estring pattern;
 
 	int pointer = 0;
 
 	// it's the root of the tree
 	node* root; // for test ,so put it in public
 
-	std::stack<gunichar> operater_stack;
+	std::stack<echar_t> operater_stack;
 	std::stack<node*> obj_stack;
 
 	EquivalenceClass* pEClass;
 
-	Glib::ustring tempSet;
-	Glib::ustring tempLeftInt;
-	Glib::ustring tempRightInt;
+	estring tempSet;
+	estring tempLeftInt;
+	estring tempRightInt;
 
 	bool isEnd = false;
 };

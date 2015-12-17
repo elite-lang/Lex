@@ -4,7 +4,7 @@
 
 #include <map>
 #include <string>
-#include "glibmm.h"
+#include "estring.h"
 
 typedef struct _cv{
 	char type;
@@ -33,7 +33,7 @@ public:
 	CharSet(const CharSet& copy);
 
 	// make constructor
-	CharSet(const Glib::ustring str);
+	CharSet(const estring& str);
 
 	// 已弃用
 	// void Combine(const CharSet& obj);
@@ -41,14 +41,14 @@ public:
 	bool operator==(const CharSet&);
 
 	// all the char is saved in the balanced tree.
-	std::map<gunichar, cv> charset; //to make the test,it should be private
+	std::map<echar_t, cv> charset; //to make the test,it should be private
 
 	// insert method , type = 0 means a standalone char
 	// type = 1 means the begin of a interval, type = 2 means the end of the interval.
-	// void insert(gunichar p, gunichar q, unsigned short eclass);
-	void insert(gunichar p, gunichar q);
-	void insert(gunichar c);
-	Glib::ustring str;
+	// void insert(echar_t p, echar_t q, unsigned short eclass);
+	void insert(echar_t p, echar_t q);
+	void insert(echar_t c);
+	estring str;
 
 	// make the set negate
 	bool negate = false;
@@ -56,7 +56,7 @@ public:
 	unsigned short eclass_sum;
 
 private:
-	gunichar CharEscape(Glib::ustring::iterator& i);
+	echar_t CharEscape(estring::iterator& i);
 	int HexToDec(const char *s);
 };
 

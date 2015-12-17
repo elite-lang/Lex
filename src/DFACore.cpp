@@ -5,10 +5,11 @@ Token* DFACore::Read() {
     tokendata.clear();
     if (t != NULL) delete t;
     t = new Token();
-    gunichar nowdata, lastdata;
-    while ((nowdata = data[point]) != 0) {
+    echar_t nowdata, lastdata;
+    while (point < data.length()) {
+        nowdata = data[point];
         // for each word ,may get it Equal Class
-        gunichar c = pEClass->getClass(nowdata);
+        echar_t c = pEClass->getClass(nowdata);
 
         // test the next state
         int nextstate = dfa->nextState(state, c);
@@ -22,15 +23,17 @@ Token* DFACore::Read() {
                     tokendata.clear();
                     continue;
                 } else {
+                    outdata.clear();
+                    outdata = tokendata.to_utf8();
                     t->type = p;
-                    t->pToken = tokendata.c_str();
+                    t->pToken = outdata.c_str();
                     t->row_num = row_point;
                     t->col_num = line_point;
                     state = 0;
                     return t;
                 }
             } else {
-                printf("Token: %s\n", tokendata.c_str());
+                printf("Token: %s\n", tokendata.to_utf8().c_str());
                 printf("ERROR STATE %d row: %d line: %d \n",state, row_point,line_point);
                 return t;
             }

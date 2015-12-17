@@ -11,7 +11,9 @@ SET (CMAKE_CXX_FLAGS_RELEASE  "-O4 -DNDEBUG")
 SET (CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
 
 SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-
+include_directories(../ExIconv/include)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../ExIconv/build)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../extlib/lib)
 endif()
 
 
@@ -35,6 +37,6 @@ pkg_check_modules(GLIBMM glibmm-2.4)
 link_directories(${GLIBMM_LIBRARY_DIRS})
 include_directories(${GLIBMM_INCLUDE_DIRS})
 add_executable(lextest ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
-target_link_libraries(lextest lex ${GLIBMM_LIBRARIES})
+target_link_libraries(lextest lex exiconv iconv charsetdetect ${GLIBMM_LIBRARIES})
 
 endif()

@@ -2,7 +2,7 @@
 * @Author: sxf
 * @Date:   2014-10-02 20:47:00
 * @Last Modified by:   sxf
-* @Last Modified time: 2015-12-07 11:52:25
+* @Last Modified time: 2015-12-17 10:27:31
 */
 #include "Lex.h"
 #include <iostream>
@@ -70,11 +70,11 @@ bool Lex::ReadConfig(const char* path) {
     while(!cfgFile.eof())//循环读取每一行  
     {  
         cfgFile.getline(tmp,1000);//每行读取前1000个字符，1000个应该足够了  
-        Glib::ustring line(tmp);  
+        std::string line(tmp);  
         size_t pos = line.find('=');//找到每行的“=”号位置，之前是key之后是value  
         if(pos==string::npos) return false;  
-        Glib::ustring key = line.substr(0,pos);//取=号之前  
-        Glib::ustring value = line.substr(pos + 1);
+        std::string key = line.substr(0,pos);//取=号之前  
+        std::string value = line.substr(pos + 1);
         // printf("%s = %s\n",key.c_str(), value.c_str());
         AddRule(key.c_str(), value.c_str());
     }  

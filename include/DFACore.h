@@ -28,8 +28,9 @@ public:
 private:
     DFA* dfa;
     int state;
-    Glib::ustring tokendata; // 当前的token数据
-    Glib::ustring data; // 全文件数据
+    estring tokendata; // 当前的token数据
+    estring data; // 全文件数据
+    std::string outdata;
     int point, row_point, line_point; //处理位置指针
     Token* t = NULL; // 上一次的token
     EquivalenceClass* pEClass;
