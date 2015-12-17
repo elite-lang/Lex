@@ -32,11 +32,7 @@ endif()
 
 if(NOT BUILD_ALL)
 
-find_package(PkgConfig)
-pkg_check_modules(GLIBMM glibmm-2.4)
-link_directories(${GLIBMM_LIBRARY_DIRS})
-include_directories(${GLIBMM_INCLUDE_DIRS})
 add_executable(lextest ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
-target_link_libraries(lextest lex exiconv iconv charsetdetect ${GLIBMM_LIBRARIES})
+target_link_libraries(lextest lex exiconv iconv charsetdetect)
 
 endif()

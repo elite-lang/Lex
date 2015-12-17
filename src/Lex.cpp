@@ -2,12 +2,11 @@
 * @Author: sxf
 * @Date:   2014-10-02 20:47:00
 * @Last Modified by:   sxf
-* @Last Modified time: 2015-12-17 10:27:31
+* @Last Modified time: 2015-12-17 21:00:17
 */
 #include "Lex.h"
 #include <iostream>
 #include <fstream>
-#include "glibmm.h"
 #include "RuleManager.h"
 using namespace std;
 
