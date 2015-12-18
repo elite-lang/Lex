@@ -117,6 +117,8 @@ DFA* RuleManager::combineAllDFA(){
 	mainDFA->setEClass(this->pEClass);
 	mainDFA->print_StateMap();
 	// this->pEClass->print();
+
+	return mainDFA;
 }
 
 void RuleManager::addStopState(vector<int>& newvec,int p)

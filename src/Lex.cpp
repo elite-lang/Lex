@@ -49,7 +49,7 @@ void Lex::setData(const char* pData){
 }
 
 int Lex::getRuleSize() {
-    ruleManager->getRuleSize();
+    return ruleManager->getRuleSize();
 }
 
 const char* Lex::getRule(int id) {

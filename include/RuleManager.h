@@ -52,7 +52,7 @@ public:
     }
 	
 	// ====setter and getter =============
-    int getRuleSize() { ruleList.size(); }
+    int getRuleSize() { return ruleList.size(); }
 	DFA* getMainDFA();
     const Rule getRule(int id) { return ruleList.at(id); }
     
