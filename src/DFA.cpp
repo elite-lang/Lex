@@ -2,6 +2,10 @@
 #include <algorithm>
 #include <cstdio>
 #include <iostream>
+#include <iterator>
+
+using namespace std;
+
 DFA::DFA()
 {
     re = NULL;
