@@ -258,7 +258,7 @@ void Regex::putOperater(echar_t c){
 CharSet* Regex::makeEscape() {
     ++pointer; // 额额, 这里居然顺序搞反了
 	echar_t c = this->pattern[pointer];
-    printf("%C", c); // 好在有这个提示, 本来都想把它删了 - -!
+    //printf("%C", c); // 好在有这个提示, 本来都想把它删了 - -!
 	CharSet* pSet;
 	if (c != 0) {
 		switch (c)

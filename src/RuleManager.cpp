@@ -70,8 +70,8 @@ DFA* RuleManager::combineAllDFA(){
 		states.push_back(0);
 		Rule& r = *p;
 		r.dfa->CreateDFA();
-		r.dfa->print_func();
-		r.dfa->print_StateMap();
+		// r.dfa->print_func();
+		// r.dfa->print_StateMap();
 	}
 	statelist.push_back(states);
 	addStopState(states,0);
@@ -115,7 +115,7 @@ DFA* RuleManager::combineAllDFA(){
 		++i;
 	}
 	mainDFA->setEClass(this->pEClass);
-	mainDFA->print_StateMap();
+	// mainDFA->print_StateMap();
 	// this->pEClass->print();
 
 	return mainDFA;

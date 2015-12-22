@@ -122,12 +122,13 @@ set<unsigned short> EquivalenceClass::makeSet(CharSet &charset)
 			}
 		}
 	}
+	/*
 	printf("ClassSet %s: ", charset.str.to_utf8().c_str());
 
 	for (auto& p : class_set) {
 		printf("%d ", p);
 	}
-	printf("\n");
+	printf("\n");*/
 	return class_set;
 }
 
