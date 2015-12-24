@@ -2,7 +2,7 @@
 * @Author: sxf
 * @Date:   2015-01-01 23:48:42
 * @Last Modified by:   sxf
-* @Last Modified time: 2015-12-07 08:54:24
+* @Last Modified time: 2015-12-24 21:12:13
 */
 
 #ifndef LEX_INTERFACE_H
@@ -15,6 +15,7 @@ struct Token
 	int type;
     int col_num;
 	int row_num;
+    const char* debug_line;
 };
 
 class LexInterface 

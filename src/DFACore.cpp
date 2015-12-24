@@ -1,13 +1,27 @@
 #include "DFACore.h"
 
+void DFACore::getNextLine(int point) {
+    int i = point;
+    while(i < data.length()) {
+        if (data[i] == '\n') break;
+        ++i;
+    }
+    estring substr = data.substr(point, i-point);
+    nowline.clear();
+    nowline = substr.to_utf8();
+}
+
 Token* DFACore::Read() {
     state = 0;
     tokendata.clear();
+    
     if (t != NULL) delete t;
     t = new Token();
     echar_t nowdata, lastdata;
     while (point < data.length()) {
         nowdata = data[point];
+        
+
         // for each word ,may get it Equal Class
         echar_t c = pEClass->getClass(nowdata);
 
@@ -29,6 +43,7 @@ Token* DFACore::Read() {
                     t->pToken = outdata.c_str();
                     t->row_num = row_point;
                     t->col_num = line_point;
+                    t->debug_line = nowline.c_str();
                     state = 0;
                     return t;
                 }
@@ -46,6 +61,7 @@ Token* DFACore::Read() {
         if (lastdata == '\n') {
             ++row_point;
             line_point = 0;
+            getNextLine(point+1);
         }
         ++point;
         ++line_point;

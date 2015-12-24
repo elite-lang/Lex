@@ -21,6 +21,7 @@ public:
 
     void setData(const char* pData) {
         data = pData;
+        getNextLine(0);
     }
 
     Token* Read();
@@ -31,9 +32,11 @@ private:
     estring tokendata; // 当前的token数据
     estring data; // 全文件数据
     std::string outdata;
+    std::string nowline;
     int point, row_point, line_point; //处理位置指针
     Token* t = NULL; // 上一次的token
     EquivalenceClass* pEClass;
+    void getNextLine(int point);
 };
 
 #endif // DFACORE_H
