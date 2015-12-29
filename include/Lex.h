@@ -2,7 +2,7 @@
 * @Author: sxf
 * @Date:   2014-10-02 20:30:46
 * @Last Modified by:   sxf
-* @Last Modified time: 2015-12-07 11:49:03
+* @Last Modified time: 2015-12-29 19:15:39
 */
 #include "LexInterface.h"
 #include <stdio.h>
@@ -12,35 +12,36 @@
 
 class RuleManager;
 
-/****
-* Lex is the main controller for the system
-****/
+
+/**
+ * @brief Lex is the main controller for the system
+ */
 class Lex : public LexInterface
 {
 public:
 	Lex();
 	~Lex();
 
-	// get the next token ,if it is done ,will return NULL
-	// it may throw exception, please try and catch it 
+	/// @brief get the next token ,if it is done ,will return NULL
+	/// 	   it may throw exception, please try and catch it 
     virtual Token* Read();
 
-	// initialize the Lex system, must be called before Read Token, it can also set the pData
+	/// @brief initialize the Lex system, must be called before Read Token, it can also set the pData
 	virtual void Init(const char* pData = NULL);
 
-	// read the config, you need to call it manually before init system, it will find the lex.cfg at the ./ path
+	/// @brief read the config, you need to call it manually before init system, it will find the lex.cfg at the ./ path
 	bool ReadConfig(const char* path = NULL);
 
-	// add a new Lex rule
+	/// @brief add a new Lex rule
 	int AddRule(const char* pName, const char* pattern); // return the rule's id
 
-	// find the rule, will return the id of it.
+	/// @brief find the rule, will return the id of it.
 	int FindRule(const char* pName);
 
-	// find the rule name
+	/// @brief  find the rule name
     virtual const char* getRule(int id);
 
-    // get the rules sum
+    /// @brief get the rules sum
     virtual int getRuleSize();
 
 	// ============================================
