@@ -1,48 +1,51 @@
 #ifndef REGEX_H
 #define REGEX_H
 
-
-
 #include <stack>
 #include <vector>
 #include <set>
 #include "CharSet.h"
 #include "EquivalenceClass.h"
 
+struct node;
 
-struct _node;
-typedef struct _node_func
+/**
+ * @brief lex正则表达式求自动机的中间变量
+ */
+struct node_func
 {
 	int num;
 	bool nullable;
-	std::set<struct _node*> firstpos;
-	std::set<struct _node*> lastpos;
-	std::set<struct _node*> followpos;
-} node_func;
+	std::set<node*> firstpos;
+	std::set<node*> lastpos;
+	std::set<node*> followpos;
+};
 
-
-typedef struct _node
+/**
+ * @brief lex中正则表达式的节点结构体
+ */
+struct node
 {
 	int type;
-	struct _node* left;
-	struct _node* right;
+	node* left; 
+	node* right;
 	CharSet* data;
 	std::set<unsigned short> class_set;
 	node_func* func;
-	_node(int _type, struct _node* _left, struct _node* _right, CharSet* pSet){
+	node(int _type, node* _left, node* _right, CharSet* pSet){
 		this->type = _type;
 		this->left = _left;
 		this->right = _right;
 		this->data = pSet;
 	}
-	~_node()
+	~node()
 	{
 		delete data;
 		delete func;
 		delete left;
 		delete right;
 	}
-} node;
+};
 
 const char node_type[][3] = {
 	{0,0,0},	// id=0 leaf node
@@ -56,7 +59,9 @@ const char node_type[][3] = {
 };
 
 
-
+/**
+ * @brief 正则表达式类
+ */
 class Regex
 {
 public:

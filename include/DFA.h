@@ -2,39 +2,37 @@
 #ifndef DFA_H
 #define DFA_H
 
-
-
-
 #include "Regex.h"
 #include <list>
 using namespace std;
 
 
-// 从0状态开始，0为初始状态
+/// @brief DFA类是一个基本的DFA自动机类，支持从正则式创建、
+/// @details 从0状态开始，0为初始状态
 class DFA
 {
 public:
 	DFA();
 	~DFA();
 
-	// it will build a DFA from the regex grammer tree
+	/// @brief it will build a DFA from the regex grammer tree
 	void Init(Regex* re);
 
-    // build the DFA
+    /// @brief build the DFA
     void CreateDFA();
 
-	// it's used for debug
+	/// @brief it's used for debug
 	void print_func();
 
 	// ========== State Map =========
 	
-	// used to get the next state
+	/// @brief used to get the next state
 	int nextState(int s, echar_t a);
 	
-	// add a new edge
+	/// @brief add a new edge
 	void addEdge(int s, int obj, echar_t a);
 
-    // is the stop state, 返回对应的token id
+    /// @brief is the stop state, 返回对应的token id
     int isStopState(int s);
 
 	// === setter and getter ===
@@ -48,10 +46,10 @@ public:
     }
 
 	// ===== for debug ======
-	// 打印DFA状态图
+	/// @brief 打印DFA状态图
 	void print_StateMap();
 private:
-	// calculate the pos;
+	/// @brief calculate the pos;
 	void dfs(node*);
 	void cal_first_and_last();
 	void cal_follow();

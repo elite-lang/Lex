@@ -20,27 +20,8 @@ DFA::~DFA()
 void DFA::Init(Regex* _re)
 {
     this->re = _re;
-
 }
 
-/*
-bool DFA::Check(const echar_t* data)
-{
-	int statue = 0;
-	for (int p = 0; data[p] != 0; ++p) {
-		statue = nextState(statue, data[p]);
-		// 出错
-		if (statue == -1) {
-			return true;
-		}
-		// 接受
-		if (statue == -2) {
-			return false;
-		}
-
-	}
-}
-*/
 
 void DFA::dfs(node* p)
 {
@@ -149,7 +130,7 @@ void DFA::CreateDFA() {
 
 	// 初始化，将根节点放入队列中
 	auto root = (*node_vec.rbegin());
-    auto end = (*(++node_vec.rbegin()));
+	auto end = (*(++node_vec.rbegin()));
 	listSet.push_back(root->func->firstpos);
 
 	// 从头开始遍历队列Q，对其中的每一个集合S考察每一个输入字符（例如a）
@@ -409,3 +390,23 @@ int DFA::isStopState(int s) {
     if (p != stopState.end()) return p->second;
     return -1;
 }
+
+
+/*
+bool DFA::Check(const echar_t* data)
+{
+	int statue = 0;
+	for (int p = 0; data[p] != 0; ++p) {
+		statue = nextState(statue, data[p]);
+		// 出错
+		if (statue == -1) {
+			return true;
+		}
+		// 接受
+		if (statue == -2) {
+			return false;
+		}
+
+	}
+}
+*/

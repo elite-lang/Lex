@@ -6,23 +6,31 @@
 #include <string>
 #include "estring.h"
 
-typedef struct _cv{
+/**
+ * @brief 字符集中的一个区间标记
+ */
+struct cv{
 	char type;
 	unsigned short eclass;
-	_cv() {
+	cv() {
 		type = 0;
 		eclass = 0;
 	}
-	_cv(char _type,unsigned short _eclass) {
+	cv(char _type,unsigned short _eclass) {
 		type = _type;
 		eclass = _eclass;
 	}
-	_cv(const _cv &p) {
+	cv(const cv &p) {
 		this->type = p.type;
 		this->eclass = p.eclass;
 	}
-} cv;
+};
 
+
+/**
+ * @brief 一个UTF-16字符集
+ * @details 使用区间描述的字符集
+ */
 class CharSet
 {
 public:

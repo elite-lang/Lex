@@ -2,7 +2,7 @@
 * @Author: sxf
 * @Date:   2014-10-02 23:31:33
 * @Last Modified by:   sxf
-* @Last Modified time: 2015-12-17 10:28:15
+* @Last Modified time: 2015-12-29 20:46:26
 */
 
 #include <string>
@@ -16,7 +16,18 @@
 #ifndef RULEMANAGER_H
 #define RULEMANAGER_H
 
+/**
+ * @brief 一条词法规则
+ * @details 描述词法规则的结构体，含有名字、对应的正则式，及由它生成的DFA
+ */
 struct Rule{
+	Rule() {}
+	Rule(const std::string& _name, const estring& _pattern, DFA* _dfa) {
+		name = _name; pattern = _pattern; dfa = _dfa;
+	}
+	void setData(const std::string& _name, const estring& _pattern, DFA* _dfa) {
+		name = _name; pattern = _pattern; dfa = _dfa;
+	}
 	std::string name;
 	estring pattern;
 	DFA* dfa;
@@ -41,30 +52,16 @@ public:
 	// find the rule, will return the id of it.
 	int FindRule(const char*);
 	
-    Token* Read();
 
-	// when you change the Rule, you should run it manually
-	DFA* combineAllDFA();
-
-    void InitCore();
-    void setData(const char* pData) {
-    	core->setData(pData);
-    }
-	
 	// ====setter and getter =============
     int getRuleSize() { return ruleList.size(); }
-	DFA* getMainDFA();
-    const Rule getRule(int id) { return ruleList.at(id); }
-    
+    Rule& getRule(int id) { return ruleList.at(id); }
+    EquivalenceClass* getEClass() { return pEClass; }
+    const std::vector<Rule>& getRuleList() { return ruleList; }
 private:
 	std::vector<Rule> ruleList;
 	EquivalenceClass* pEClass;
-	// Main dfa for all dfa combine to one
-	DFA* mainDFA;
-    DFACore* core;
-	int testin(vector< int > newvec, vector< vector< int > > statelist);
-	bool testequal(vector< int > , vector< int > );
-    void addStopState(vector<int>&,int);
+	
 	/*
 	// add a new Lex rule
 	int AddRule(std::wstring pName, std::wstring pattern); // return the rule's id
