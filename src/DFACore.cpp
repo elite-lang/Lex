@@ -18,6 +18,7 @@ Token* DFACore::Read() {
     if (t != NULL) delete t;
     t = new Token();
     echar_t nowdata, lastdata;
+	lastdata = 0;
     while (point < data.length()) {
         nowdata = data[point];
         
