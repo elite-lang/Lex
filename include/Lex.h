@@ -1,4 +1,4 @@
-/* 
+/*
 * @Author: sxf
 * @Date:   2014-10-02 20:30:46
 * @Last Modified by:   sxf
@@ -30,7 +30,7 @@ public:
 	~Lex();
 
 	/// @brief get the next token ,if it is done ,will return NULL
-	/// 	   it may throw exception, please try and catch it 
+	/// 	   it may throw exception, please try and catch it
     virtual Token* Read();
 
 	/// @brief initialize the Lex system, must be called before Read Token, it can also set the pData
@@ -55,7 +55,7 @@ public:
     void InitCore();
 
 	// ============================================
-	// getter and setter 
+	// getter and setter
 	// ============================================
 	const char* getData();
 	virtual void setData(const char* pData);
@@ -72,7 +72,7 @@ private:
 	// ============================================
 	// member variable
 	// ============================================
-	
+
 	/// Main dfa for all dfa combine to one
 	DFA* mainDFA;
 
@@ -84,10 +84,10 @@ private:
 	const char* pData = NULL; //all the data need to be splited
 
 	/// pointer for the data, it's always point to the next char need to be scan.
-	int pointer = 0; 
+	int pointer = 0;
 
 	/// used to manage the rules
-	RuleManager* ruleManager; 
+	RuleManager* ruleManager;
 	//if the class is declared before defined, use it must be a pointer.
 	//because the complier didn't know how much memory it need to allocated.
 

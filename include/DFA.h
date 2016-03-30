@@ -25,10 +25,10 @@ public:
 	void print_func();
 
 	// ========== State Map =========
-	
+
 	/// @brief used to get the next state
 	int nextState(int s, echar_t a);
-	
+
 	/// @brief add a new edge
 	void addEdge(int s, int obj, echar_t a);
 
@@ -54,7 +54,6 @@ private:
 	void cal_first_and_last();
 	void cal_follow();
 
-
 	vector<node*> node_vec;
 	vector<node_func*> node_function;
 
@@ -63,15 +62,15 @@ private:
 	bool IsContainAcceptingState(set<node*> &setNode);
 	// bool Check(const echar_t* data);
 	vector<set<node*>> listSet;
-	
+
 	EquivalenceClass* pEClass;
-	
+
     Regex* re;
 
     map<int,int> stopState;
 public:
 	int Top;
-	
+
 	vector<echar_t>	m_default;
 	vector<int>	m_base;
 	vector<int>	m_next;
@@ -80,7 +79,7 @@ public:
 // 	int state_base; // 表示状态初始状态的开始标号 已弃用
 // 	void setState_base(int _b) { state_base = _b; }
 // 	int getState_base() { return state_base; }
-	
+
 };
 
 #endif // DFA_H

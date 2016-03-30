@@ -1,4 +1,4 @@
-﻿/* 
+﻿/*
 * @Author: sxf
 * @Date:   2014-10-02 20:47:00
 * @Last Modified by:   sxf
@@ -8,6 +8,8 @@
 #include <iostream>
 #include <fstream>
 #include "RuleManager.h"
+#include "GraphvizPrinter.hpp"
+
 using namespace std;
 
 Lex::Lex() {
@@ -26,13 +28,14 @@ void Lex::Init(const char* pData){
     // init the lex system
     this->pEClass = ruleManager->getEClass();
     combineAllDFA();
+	GraphvizPrinter::print(mainDFA);
     InitCore();
     if (pData != NULL) setData(pData);
 }
 
 int Lex::AddRule(const char* pName,const char* pattern){
 	return ruleManager->AddRule(pName,pattern);
-} 
+}
 
 int Lex::FindRule(const char* pName){
     return ruleManager->FindRule(pName);
@@ -57,27 +60,26 @@ const char* Lex::getRule(int id) {
 }
 
 bool Lex::ReadConfig(const char* path) {
-    fstream cfgFile;  
-    cfgFile.open(path);//打开文件      
-    if(!cfgFile.is_open())  
-    {  
+    fstream cfgFile;
+    cfgFile.open(path);//打开文件
+    if(!cfgFile.is_open())
+    {
         printf("can not open cfg file!\n");
-        return false;  
+        return false;
     }
-    char tmp[1000];  
-    while(!cfgFile.eof())//循环读取每一行  
-    {  
-        cfgFile.getline(tmp,1000);//每行读取前1000个字符，1000个应该足够了  
-        std::string line(tmp);  
-        size_t pos = line.find('=');//找到每行的“=”号位置，之前是key之后是value  
-        if(pos==string::npos) return false;  
-        std::string key = line.substr(0,pos);//取=号之前  
+    char tmp[1000];
+    while(!cfgFile.eof())//循环读取每一行
+    {
+        cfgFile.getline(tmp,1000);//每行读取前1000个字符，1000个应该足够了
+        std::string line(tmp);
+        size_t pos = line.find('=');//找faj到每行的“=”号位置，之前是key之后是value
+        if(pos==string::npos) return false;
+        std::string key = line.substr(0,pos);//取=号之前
         std::string value = line.substr(pos + 1);
-        // printf("%s = %s\n",key.c_str(), value.c_str());
         AddRule(key.c_str(), value.c_str());
-    }  
-    
-    return true;  
+    }
+
+    return true;
 }
 
 void Lex::InitCore() {
@@ -131,7 +133,7 @@ DFA* Lex::combineAllDFA(){
                 statelist.push_back(*newvec);
                 p = statelist.size()-1;
                 addStopState(*newvec,p);
-            } 
+            }
             mainDFA->addEdge(i,p,c);
             // printf("state: %d  next: %d char: %d  ", i, p, c);
             // printvec(*newvec);
