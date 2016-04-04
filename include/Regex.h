@@ -27,7 +27,7 @@ struct node_func
 struct node
 {
 	int type;
-	node* left; 
+	node* left;
 	node* right;
 	CharSet* data;
 	std::set<unsigned short> class_set;
