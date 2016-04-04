@@ -5,7 +5,7 @@
 #include "Regex.h"
 #include <list>
 using namespace std;
-
+  
 
 /// @brief DFA类是一个基本的DFA自动机类，支持从正则式创建、
 /// @details 从0状态开始，0为初始状态
