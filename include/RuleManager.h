@@ -1,4 +1,4 @@
-/* 
+/*
 * @Author: sxf
 * @Date:   2014-10-02 23:31:33
 * @Last Modified by:   sxf
@@ -36,6 +36,7 @@ struct Rule{
 	}
 };
 
+class DebugJson;
 
 /****
 * It's a manager for rules and regex.
@@ -45,13 +46,13 @@ class RuleManager
 public:
 	RuleManager();
 	~RuleManager();
-	
+
 	// add a new Lex rule
 	int AddRule(const char*, const char*); // return the rule's id
 
 	// find the rule, will return the id of it.
 	int FindRule(const char*);
-	
+
 
 	// ====setter and getter =============
     int getRuleSize() { return ruleList.size(); }
@@ -61,7 +62,7 @@ public:
 private:
 	std::vector<Rule> ruleList;
 	EquivalenceClass* pEClass;
-	
+	DebugJson* debug_json;
 	/*
 	// add a new Lex rule
 	int AddRule(std::wstring pName, std::wstring pattern); // return the rule's id
@@ -74,7 +75,7 @@ private:
 	bool ChangeRule(std::wstring pName, std::wstring pattern);
 	bool ChangeRule(int id,std::wstring pattern);
 
-	
+
 	*/
 };
 
