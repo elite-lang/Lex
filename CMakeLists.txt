@@ -24,10 +24,11 @@ list(REMOVE_ITEM  source_files ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 
 if(USE_DYNAMIC)
 	add_library(lex SHARED ${source_files}) # 使用动态库
+	install(TARGETS lex runtime DESTINATION bin)
 else()
 	add_library(lex STATIC ${source_files}) # 使用静态库
+	install(TARGETS lex ARCHIVE DESTINATION lib)
 endif()
-
 
 
 if(NOT BUILD_ALL)
