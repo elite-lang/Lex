@@ -34,7 +34,7 @@ CharSet::CharSet(const estring& _str) {
 				if (last == 0 || isConnector){
 					// throw exception("error, \'-\' is not right");
 				}
-				
+
 				isConnector = true;
 			}
 			else {
@@ -42,9 +42,9 @@ CharSet::CharSet(const estring& _str) {
 				if (c == '\\') {
 					c = CharEscape(i);
 				}
-		
+
 				if (isConnector) {
-					insert(last,c); 
+					insert(last,c);
 					last = 0;
 					isConnector = false;
 				}
@@ -76,10 +76,10 @@ CharSet::CharSet(const estring& _str) {
 // 			insert(t, i->first, 0);
 // 		}
 // 	}
-	
+
 // 	// 等价类编号压缩
 // 	vector<unsigned short> v(eclass_sum * 2);
-	
+
 // 	for (auto i = charset.begin(); i != charset.end(); ++i)
 // 	{
 // 		v[i->second.eclass] = i->second.eclass;
@@ -100,7 +100,7 @@ CharSet::CharSet(const estring& _str) {
 
 // void CharSet::insert(echar_t p, echar_t q, unsigned short eclass) {
 // 	if (p != q) {
-		
+
 
 // 	}
 // 	else {
@@ -214,9 +214,9 @@ echar_t CharSet::CharEscape(estring::iterator& i) {
 
 		// 16进制表示数
 		case 'u':  // 后接4位的16进制数字
-			ws = 4;	goto EscapeChange;	
+			ws = 4;	goto EscapeChange;
 		case 'x': { // 后接2位16进制数
-			ws = 2; goto EscapeChange;	
+			ws = 2; goto EscapeChange;
 		}
 		default: return *i;
 	}
