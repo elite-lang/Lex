@@ -9,15 +9,12 @@ class DFACore
 public:
     DFACore() {}
     ~DFACore() { if (t != NULL) delete t; }
-    
-    DFACore(DFA* _dfa, EquivalenceClass* _pEClass) { 
-        Init(_dfa, _pEClass); 
+
+    DFACore(DFA* _dfa, EquivalenceClass* _pEClass) {
+        Init(_dfa, _pEClass);
     }
 
-    void Init(DFA* _dfa, EquivalenceClass* _pEClass) {
-        dfa = _dfa; pEClass = _pEClass;
-        point = 0; row_point =1; line_point = 0;
-    }
+    void Init(DFA* _dfa, EquivalenceClass* _pEClass);
 
     void setData(const char* pData) {
         data = pData;
@@ -37,6 +34,7 @@ private:
     Token* t = NULL; // 上一次的token
     EquivalenceClass* pEClass;
     void getNextLine(int point);
+
 };
 
 #endif // DFACORE_H

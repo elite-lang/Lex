@@ -1,4 +1,6 @@
 #include "DFACore.h"
+#include "DebugJson.h"
+
 
 void DFACore::getNextLine(int point) {
     int i = point;
@@ -11,24 +13,34 @@ void DFACore::getNextLine(int point) {
     nowline = substr.to_utf8();
 }
 
+
+
+void DFACore::Init(DFA* _dfa, EquivalenceClass* _pEClass) {
+   dfa = _dfa; pEClass = _pEClass;
+   point = 0; row_point =1; line_point = 0;
+   if (DebugMsg::isDebug()) DebugJson::getInst().clear();
+}
+
 Token* DFACore::Read() {
+    DebugJson& dj = DebugJson::getInst();
     state = 0;
     tokendata.clear();
-    
+
     if (t != NULL) delete t;
     t = new Token();
     echar_t nowdata, lastdata;
 	lastdata = 0;
     while (point < data.length()) {
         nowdata = data[point];
-        
+
 
         // for each word ,may get it Equal Class
         echar_t c = pEClass->getClass(nowdata);
 
         // test the next state
         int nextstate = dfa->nextState(state, c);
-        
+        if (DebugMsg::isDebug()) dj.addLine(line_point, row_point, state, nowdata);
+
         // if the state is stopped and the next is fault, get the token
         if (nextstate == -1) {
             int p = dfa->isStopState(state);
@@ -46,6 +58,7 @@ Token* DFACore::Read() {
                     t->col_num = line_point;
                     t->debug_line = nowline.c_str();
                     state = 0;
+                    if (DebugMsg::isDebug()) dj.addLine(line_point, row_point, state, nowdata);
                     return t;
                 }
             } else {

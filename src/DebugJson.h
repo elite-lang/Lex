@@ -10,10 +10,10 @@
 class LexLine {
 public:
     LexLine(int l, int r, int s, int n) {
-        line = l; row = r; status = s; next = n;
+        col = l; row = r; status = s; next = n;
     }
 
-    int line;
+    int col;
     int row;
     int status;
     int next;
@@ -24,7 +24,7 @@ private:
 
     template<class Archive>
     void serialize(Archive &ar) {
-        ar( CEREAL_NVP(line),
+        ar( CEREAL_NVP(col),
             CEREAL_NVP(row),
             CEREAL_NVP(status),
             CEREAL_NVP(next));
@@ -51,7 +51,16 @@ public:
     		DebugMsg::lex_save_close(); // 一定要确保JSONOutput输出完后再close
         }
     }
+    void clear() {
+        rnames.clear();
+        regexs.clear();
+        lines.clear();
+    }
 
+    static DebugJson& getInst() {
+        static DebugJson inst;
+        return inst;
+    }
 private:
     std::vector<std::string> rnames;
     std::vector<std::string> regexs;
