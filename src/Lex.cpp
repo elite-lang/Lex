@@ -18,7 +18,6 @@ Lex::Lex() {
 }
 
 Lex::~Lex() {
-	if (DebugMsg::isDebug()) DebugJson::getInst().save();
     delete ruleManager;
 }
 
@@ -36,7 +35,7 @@ void Lex::Init(const char* pData){
 }
 
 int Lex::AddRule(const char* pName,const char* pattern){
-	if (DebugMsg::isDebug()) DebugJson::getInst().addRegex(pName, pattern);
+	DebugJson::getInst().addRegex(pName, pattern);
 	return ruleManager->AddRule(pName,pattern);
 }
 

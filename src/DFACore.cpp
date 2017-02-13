@@ -18,7 +18,7 @@ void DFACore::getNextLine(int point) {
 void DFACore::Init(DFA* _dfa, EquivalenceClass* _pEClass) {
    dfa = _dfa; pEClass = _pEClass;
    point = 0; row_point =1; line_point = 0;
-   if (DebugMsg::isDebug()) DebugJson::getInst().clear();
+
 }
 
 Token* DFACore::Read() {
@@ -82,5 +82,6 @@ Token* DFACore::Read() {
         lastdata = nowdata;
     }
     t->type = 0;// 0 is the error type
+    if (DebugMsg::isDebug()) DebugJson::getInst().save();
     return t;
 }

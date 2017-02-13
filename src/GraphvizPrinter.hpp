@@ -11,6 +11,7 @@ public:
         if (!DebugMsg::isDebug()) return;
         std::ostream& os = DebugMsg::lex_graphviz();
         os << "digraph G {" << endl;
+        os << "rankdir=LR" << endl;
         for (int i = 0; i < dfa->getStateSum(); ++i) {
             for (int j = 1; j<=dfa->getEClass()->getSum(); ++j) {
                 int next = dfa->nextState(i, j);
